@@ -58,7 +58,7 @@ def run_snmpwalk_to_html(ip_address, output_file):
         rendered_html = template.render(ip_address=ip_address, model_value=model_value, matricola_value=matricola_value,toner_value=toner_value)
         
         # Write the rendered HTML to the output file
-        output_file_path = "/Users/administrator/Library/CloudStorage/Dropbox/Zsysadmin/romana maceri/test/" + output_file
+        output_file_path = "/enteryourpath/" + output_file
         with open(output_file_path, 'w') as f:
             f.write(rendered_html)
         
@@ -80,7 +80,7 @@ def generate_snmp_html():
 # Route to serve the generated HTML file
 @app.route('/snmp_walk_result.html')
 def serve_snmp_html():
-    return send_from_directory("/Users/administrator/Library/CloudStorage/Dropbox/Zsysadmin/romana maceri/test/", "snmp_walk_result.html")
+    return send_from_directory("/enteryourpath/", "snmp_walk_result.html")
 
 # Route for the index page
 @app.route('/')
