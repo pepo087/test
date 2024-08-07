@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stampanti snmp</title>
+    <script>
+        async function generateHTML(ipAddress) {
+            const loadingBar = document.getElementById('loading-bar');
+            const loadingBarContainer = document.getElementById('loading-bar-container');
+            
+            // Reset and show the loading bar
+            loadingBar.style.width = '0%';
+            loadingBarContainer.style.display = 'block';
+
+            // Animate the loading bar incrementally
+            let width = 0;
+            const interval = setInterval(() => {
+                if (width >= 250) {
+                    clearInterval(interval);
+                } else {
+                    width += 10; // Adjust this value to control speed
+                    loadingBar.style.width = width + '%';
+                }
+            }, 1000); // Adjust the interval duration if needed
+
+            const response = await fetch('/generate_snmp_html', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ ip_address: ipAddress })
+            });
+
+            // Stop the interval when the request is complete
+            clearInterval(interval);
+            loadingBarContainer.style.display = 'none'; // Hide the loading bar
+
+            const result = await response.json();
+            if (result.success) {
+                document.getElementById('result').innerHTML = `<h2>${result.message}</h2><iframe src="/snmp_walk_result.html" width="500px" height="200px"></iframe>`;
+            } else {
+                document.getElementById('result').innerHTML = `<h2>Error: ${result.message}</h2>`;
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff; /* Light blue background */
+            color: #333;
+        }
+        h2 {
+            color: #1e90ff; /* Dodger blue */
+        }
+        .container {
+            display: inline-flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .column {
+            flex: 45%;
+            padding: 10px;
+            background-color: #e6f7ff; /* Light blue background */
+            border: 1px solid #b0e0e6; /* Light blue border */
+            border-radius: 10px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+        }
+        a {
+            text-decoration: none;
+            color: #1e90ff; /* Dodger blue */
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e6f7ff; /* Light blue background */
+            border: 1px solid #b0e0e6; /* Light blue border */
+            border-radius: 10px;
+        }
+        #loading-bar-container {
+            display: none; /* Initially hidden */
+            text-align: center;
+            margin-top: 20px;
+        }
+        #loading-bar {
+            width: 0;
+            height: 20px;
+            background-color: #1e90ff; /* Dodger blue */
+            border-radius: 10px;
+            transition: width 1s linear;
+        }
+    </style>
+</head>
+<body>
+    <h2>Stampanti snmp</h2>
+    <h3>avviare il codice py per eseguire il tutto con vsc--->parte il web server sulla porta 5000
+    <br>salve il file snmp nella cartella test </br>
+    </h3>
+    <div class="container">
+        <div class="column">
+            <h3>RM</h3>
+            <ul>
+                <li><a href="#" onclick="generateHTML('192.168.0.10')">ACCETTAZIONE-DDT</a></li>
+                <li><a href="#" onclick="generateHTML('192.168.0.181')">AGENTI</a></li>
+                <li><a href="#" onclick="generateHTML('192.168.0.183')">ANTONELLO</a></li>
+                <li><a href="#" onclick="generateHTML('192.168.0.67')">AMBIENTE-Multifunzione</a></li>
+                <li><a href="#" onclick="generateHTML('192.168.0.175')">ATI</a></li>
+                <li><a href="#" onclick="generateHTML('192.168.0.186')">BARBARA</a></li>
+                <li><a href="#" onclick="generateHTML('192.168.0.92')">CASSA</a></li>
+                <li><a href="#" onclick="generateHTML('192.168.0.60')">CED</a></li>
+                <li><a href="#" onclick="generateHTML('192.168.0.180')">COMMERCIALE</a></li>
+                <li><a href="#" onclick="generateHTML('192.168.0.62')">DIREZIONE</a></li>
+                <li><a href="#" onclick="generateHTML('192.168.0.132')">ISACENCU</a></li>
+                <li><a href="#" onclick="generateHTML('192.168.0.104')">MANUTENZIONE</a></li>
+                <li><a href="#" onclick="generateHTML('192.168.0.185')">PERSONALE</a></li>
+                <li><a href="#" onclick="generateHTML('192.168.0.40')">ROSATI ROCCHI</a></li>
+                <li><a href="#" onclick="generateHTML('192.168.0.23')">SEGRETERIA</a></li>
+                <li><a href="#" onclick="generateHTML('192.168.0.89')">TRASPORTI Multi</a></li>
+                <li><a href="#" onclick="generateHTML('192.168.0.16')">TRASPORTI-fir1</a></li>
+                <li><a href="#" onclick="generateHTML('192.168.0.17')">TRASPORTI-fir2</a></li>
+            </ul>
+        </div>
+        <div class="column">
+            <h3>Proambiente</h3>
+            <ul>
+                <li><a href="#" onclick="generateHTML('192.168.2.91')">RICOH_AFICIO</a></li>
+                <li><a href="#" onclick="generateHTML('192.168.2.151')">PROAMBIENTE</a></li>
+                <li><a href="#" onclick="generateHTML('192.168.2.30')">FATTURE</a></li>
+                <li><a href="#" onclick="generateHTML('192.168.2.34')">CONTABILITA</a></li>
+            </ul>
+        </div>
+        <div class="column">
+            <h3>Ambiente e risorse</h3>
+            <ul>
+                <li><a href="#" onclick="generateHTML('192.168.5.217')">RICOH_AFICIO (in DHCP)</a></li>
+              
+            </ul>
+        </div>
+    </div>
+    <div id="loading-bar-container">
+        <div id="loading-bar"></div>
+        <p>Loading, please wait...</p>
+    </div>
+    <div id="result"></div>
+</body>
+</html>
