@@ -1,1 +1,5 @@
-simple snmp for ricoh printersa
+# snmp ricoh
+
+
+#### simple snmp for ricoh printers
+
