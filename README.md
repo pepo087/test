@@ -12,4 +12,7 @@ output_file_path = "/enteryourpath/" + output_file
 @app.route('/snmp_walk_result.html')
 def serve_snmp_html():
 return send_from_directory("/enteryourpath/", "snmp_walk_result.html")
+
+
 ```
+- change in file index.html the ip address of printers
