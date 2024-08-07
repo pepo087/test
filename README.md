@@ -1,7 +1,7 @@
 # snmp ricoh
 
 
-#### simple snmp for ricoh printers
+#### simple snmp requests for ricoh printers
 
 - modified this lines in app.py with your path
 ```
