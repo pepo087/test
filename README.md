@@ -3,7 +3,7 @@
 
 #### simple snmp for ricoh printers
 
-- modified this lines in app.py   
+- modified this lines in app.py with your path
 ```
 # Write the rendered HTML to the output file
 output_file_path = "/enteryourpath/" + output_file
