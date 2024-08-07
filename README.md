@@ -16,3 +16,9 @@ return send_from_directory("/enteryourpath/", "snmp_walk_result.html")
 
 ```
 - change in file index.html the ip address of printers
+```
+
+                <li><a href="#" onclick="generateHTML('x.x.0.10')">printer1</a></li>
+                <li><a href="#" onclick="generateHTML('x.x.0.181')">printer2</a></li>
+                <li><a href="#" onclick="generateHTML('x.x.0.183')">printer3</a></li>
+```
