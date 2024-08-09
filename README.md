@@ -1,7 +1,7 @@
 # snmp ricoh
 
 
-#### simple snmp requests for ricoh printers
+#### simple snmp requests for ricoh printers for MacOs system
 
 
 
